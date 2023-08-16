@@ -17,9 +17,10 @@ RUN \
     && awk '/^P:libreoffice$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
-  apk add --no-cache \
+  echo @edge http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
+  apk add --no-cache --allow-untrusted \
     libreoffice==${LIBREOFFICE_VERSION} \
-    libreoffice-lang-zh_cn ttf-dejavu fontconfig \
+    libreoffice-lang-zh_cn ttf-dejavu fontconfig font-adobe-100dpi wqy-zenhei@edge \
     openjdk8-jre \
     st \
     thunar \
