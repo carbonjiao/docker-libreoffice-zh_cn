@@ -16,12 +16,15 @@ RUN \
     LIBREOFFICE_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.18/community/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
     && awk '/^P:libreoffice$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
+  sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
   apk add --no-cache \
     libreoffice==${LIBREOFFICE_VERSION} \
+    libreoffice-lang-zh_cn ttf-dejavu fontconfig \
     openjdk8-jre \
     st \
     thunar \
     tint2 && \
+  rm -rf /var/cache/apk/* && mkfontscale && mkfontdir && fc-cache && \
   echo "**** openbox tweaks ****" && \
   sed -i \
     's/NLMC/NLIMC/g' \
