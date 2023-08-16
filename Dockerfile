@@ -18,6 +18,7 @@ RUN \
   fi && \
   apk add --no-cache \
     libreoffice==${LIBREOFFICE_VERSION} \
+    libreoffice-lang-zh_cn \
     openjdk8-jre \
     st \
     thunar \
